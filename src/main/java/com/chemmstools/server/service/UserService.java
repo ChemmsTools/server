@@ -1,6 +1,10 @@
 package com.chemmstools.server.service;
 
+import com.chemmstools.server.beans.User;
+
 public interface UserService {
 
-    boolean authUserUserNameAndPassword(String username,String password);
+    boolean authUserUserName(String username);
+
+    User getUserByUsername(String username);
 }

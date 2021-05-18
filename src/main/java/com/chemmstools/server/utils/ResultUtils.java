@@ -14,10 +14,17 @@ public class ResultUtils {
     }
 
 
-    public ResultMessage sendResult(String code,String msg,String token){
-        this.resultMessage.setResultCode(code);
-        this.resultMessage.setToken(token);
-        this.resultMessage.setResultMsg(msg);
+    public ResultMessage failResult(String message){
+        this.resultMessage.setSuccess("false");
+        this.resultMessage.setMessage(message);
+        this.resultMessage.setData("");
+        return resultMessage;
+    }
+
+    public ResultMessage successResult(String data){
+        this.resultMessage.setSuccess("true");
+        this.resultMessage.setMessage("");
+        this.resultMessage.setData(data);
         return resultMessage;
     }
 

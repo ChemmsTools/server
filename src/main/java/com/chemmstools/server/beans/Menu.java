@@ -1,10 +1,11 @@
 package com.chemmstools.server.beans;
 
+
 import lombok.Data;
 
 @Data
-public class User {
+public class Menu {
     private int id;
-    private String name;
-    private String username;
+    private String language;
+    private String data;
 }

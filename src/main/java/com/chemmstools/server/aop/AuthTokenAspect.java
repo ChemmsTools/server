@@ -37,10 +37,10 @@ public class AuthTokenAspect {
             }
             AuthorizeParams authorizeParams= (AuthorizeParams) getProceedingJoinPointArg(proceedingJoinPoint,AuthorizeParams.class);
             if(authorizeParams==null){
-                return resultUtils.sendResult("400","参数错误","");
+                return resultUtils.failResult("参数错误");
             }
             if(!tokenService.authToken(authorizeParams.getToken())){
-                return resultUtils.sendResult("400","token验证失败","");
+                return resultUtils.failResult("token验证失败");
             }
             return proceedingJoinPoint.proceed();
         } catch (Throwable throwable) {

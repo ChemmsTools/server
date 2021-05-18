@@ -29,23 +29,29 @@ public class AuthPermissionAspect {
     }
 
     @Around("pointcut()")
-    public Object before(ProceedingJoinPoint proceedingJoinPoint){
+    public Object around(ProceedingJoinPoint proceedingJoinPoint){
+//        try {
+//            User user= (User) getProceedingJoinPointArg(proceedingJoinPoint, User.class);
+//            if(user==null){
+//                return resultUtils.sendResult("400","参数错误");
+//            }
+//            AuthPermission authPermission=((MethodSignature)proceedingJoinPoint.getSignature()).getMethod().getAnnotation(AuthPermission.class);
+//            for(String permission:authPermission.values()){
+//                if(permission.equals(user.getPermission())){
+//                    return proceedingJoinPoint.proceed();
+//                }
+//            }
+//            return resultUtils.sendResult("400","权限验证错误");
+//        } catch (Throwable throwable) {
+//            throwable.printStackTrace();
+//        }
+//        return "error";
         try {
-            User user= (User) getProceedingJoinPointArg(proceedingJoinPoint, User.class);
-            if(user==null){
-                return resultUtils.sendResult("400","参数错误","");
-            }
-            AuthPermission authPermission=((MethodSignature)proceedingJoinPoint.getSignature()).getMethod().getAnnotation(AuthPermission.class);
-            for(String permission:authPermission.values()){
-                if(permission.equals(user.getPermission())){
-                    return proceedingJoinPoint.proceed();
-                }
-            }
-            return resultUtils.sendResult("400","权限验证错误","");
+            return proceedingJoinPoint.proceed();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-        return "error";
+        return resultUtils.failResult("服务器异常");
     }
 
     private Object getProceedingJoinPointArg(ProceedingJoinPoint proceedingJoinPoint,Class clazz){
